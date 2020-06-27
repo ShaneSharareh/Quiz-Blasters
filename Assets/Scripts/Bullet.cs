@@ -24,6 +24,7 @@ public class Bullet : MonoBehaviour
             if (collision.gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text == GameManager.correctAnswer) {
                 GameManager.questionCounter++;
                 resetEnemies();
+              
                  //collision.gameObject.transform.position = respawn;
 
                 //Destroy(collision.gameObject.transform.parent.gameObject);
@@ -40,12 +41,11 @@ public class Bullet : MonoBehaviour
     }
 
     void resetEnemies() {
-        GameObject.Find("Enemy1").transform.position = (new Vector3(-2.919728F, 2.02681F, 164.5656F));
-        GameObject.Find("Enemy2").transform.position = (new Vector3(0.01F, 1.91F, 164.5656F));
-        GameObject.Find("Enemy3").transform.position = (new Vector3(2.38F, 2.06681F, 164.5656F));
-        GameObject.Find("Enemy4").transform.position = (new Vector3(-6.66F, 0.21F, 164.5656F));
-        GameObject.Find("Enemy5").transform.position = (new Vector3(0.18F, -0.78F, 164.5656F));
-        GameObject.Find("Enemy6").transform.position = (new Vector3(6.08F, 0.06F, 164.5656F));
+        GameObject.Find("Enemy1").transform.position = (new Vector3(-2.61F, 2.93F, 164.5656F));
+        GameObject.Find("Enemy2").transform.position = (new Vector3(2.64F, 2.93F, 164.5656F));
+        GameObject.Find("Enemy3").transform.position = (new Vector3(-5.01F, 0.21F, 164.5656F));
+        GameObject.Find("Enemy4").transform.position = (new Vector3(5.15F, 0.21F, 164.5656F));
+        GameObject.Find("Enemy5").transform.position = (new Vector3(0.1F, -0.82F, 164.5656F));
 
 
 

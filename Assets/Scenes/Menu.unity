@@ -977,7 +977,7 @@ GameObject:
   - component: {fileID: 759407371}
   - component: {fileID: 759407370}
   m_Layer: 5
-  m_Name: InputField (1)
+  m_Name: ifAnswer3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1215,14 +1215,14 @@ MonoBehaviour:
   questionsMenu: {fileID: 980954257}
   btnStart: {fileID: 1852703111}
   btnNextQuestion: {fileID: 1877785140}
-  btnBack: {fileID: 0}
+  btnBack: {fileID: 1370465959}
   btnDone: {fileID: 982952490}
-  tvQuestion: {fileID: 1538565192}
-  tvCorrectAnswer: {fileID: 2033471081}
-  tvAnswer2: {fileID: 1151616941}
-  tvAnswer3: {fileID: 2056446036}
-  tvAnswer4: {fileID: 805033915}
-  questions: 
+  tvQuestion: {fileID: 1624054087}
+  tvCorrectAnswer: {fileID: 1829000993}
+  tvAnswer2: {fileID: 1726220832}
+  tvAnswer3: {fileID: 759407370}
+  tvAnswer4: {fileID: 896554592}
+  tvQuestionCount: {fileID: 972638640}
 --- !u!4 &824266310
 Transform:
   m_ObjectHideFlags: 0
@@ -1250,7 +1250,7 @@ GameObject:
   - component: {fileID: 896554593}
   - component: {fileID: 896554592}
   m_Layer: 5
-  m_Name: InputField (3)
+  m_Name: ifAnswer4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1389,7 +1389,7 @@ GameObject:
   - component: {fileID: 972638641}
   - component: {fileID: 972638640}
   m_Layer: 5
-  m_Name: Text
+  m_Name: tvQuestionCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1830,7 +1830,7 @@ GameObject:
   - component: {fileID: 1370465960}
   - component: {fileID: 1370465959}
   m_Layer: 5
-  m_Name: Button (4)
+  m_Name: btnBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2268,7 +2268,7 @@ GameObject:
   - component: {fileID: 1624054088}
   - component: {fileID: 1624054087}
   m_Layer: 5
-  m_Name: InputField (4)
+  m_Name: ifQuestion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2605,7 +2605,7 @@ GameObject:
   - component: {fileID: 1726220833}
   - component: {fileID: 1726220832}
   m_Layer: 5
-  m_Name: InputField (2)
+  m_Name: ifAnswer2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2745,7 +2745,7 @@ GameObject:
   - component: {fileID: 1829000994}
   - component: {fileID: 1829000993}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: ifCorrectAnswer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3414,7 +3414,7 @@ MonoBehaviour:
   tvAnswer2: {fileID: 0}
   tvAnswer3: {fileID: 0}
   tvAnswer4: {fileID: 0}
-  questions: 
+  tvQuestionCount: {fileID: 0}
 --- !u!114 &2111003164
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,16 +12,17 @@ public class Menu : MonoBehaviour
     public Button btnNextQuestion;
     public Button btnBack;
     public Button btnDone;
-    public Text tvQuestion;
-    public Text tvCorrectAnswer;
-    public Text tvAnswer2;
-    public Text tvAnswer3;
-    public Text tvAnswer4;
-    public List<int> questions;
+    public InputField tvQuestion;
+    public InputField tvCorrectAnswer;
+    public InputField tvAnswer2;
+    public InputField tvAnswer3;
+    public InputField tvAnswer4;
+    public Text tvQuestionCount;
+    private int questionCount;
     // Start is called before the first frame update
     void Start()
     {
-        questions = new List<int>();
+        questionCount = 1;
         questionsMenu.gameObject.SetActive(false);
         btnStart.onClick.AddListener(setUpQuestionsMenu); ;
         btnNextQuestion.onClick.AddListener(addQuestions);
@@ -34,8 +35,9 @@ public class Menu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
+        tvQuestionCount.text = $"Question: {questionCount}";
+
+
     }
 
     void setUpQuestionsMenu() {
@@ -44,13 +46,26 @@ public class Menu : MonoBehaviour
     }
 
     void addQuestions() {
-        questions.Add(3);//new Question(tvQuestion.text, tvCorrectAnswer.text, tvAnswer2.text, tvAnswer3.text, tvAnswer4.text));
+    QuizManager.questions.Add(new Question(tvQuestion.text, tvCorrectAnswer.text, tvAnswer2.text, tvAnswer3.text, tvAnswer4.text));
+        clearFields();
+        questionCount++;
     }
 
     void loadGame() {
-        questions.Add(4);//new Question(tvQuestion.text, tvCorrectAnswer.text, tvAnswer2.text, tvAnswer3.text, tvAnswer4.text));
-        //Debug.Log(tvQuestion.text);
+        QuizManager.questions.Add(new Question(tvQuestion.text, tvCorrectAnswer.text, tvAnswer2.text, tvAnswer3.text, tvAnswer4.text));
+        Debug.Log(tvQuestion.text);
+        clearFields();
         SceneManager.LoadScene("GamePlay");
+        questionCount++;
+    }
+
+    void clearFields() {
+        tvQuestion.text = "";
+        tvCorrectAnswer.text = "";
+        tvAnswer2.text = "";
+        tvAnswer3.text = "";
+        tvAnswer4.text = "";
+
     }
 
 }
