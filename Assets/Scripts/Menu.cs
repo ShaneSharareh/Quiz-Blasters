@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    public AudioSource audioSource;
     public Canvas mainMenu;
     public Canvas questionsMenu;
     public Button btnStart;
     public Button btnNextQuestion;
     public Button btnBack;
     public Button btnDone;
+    public Button btnQuit;
     public InputField tvQuestion;
     public InputField tvCorrectAnswer;
     public InputField tvAnswer2;
@@ -22,20 +24,24 @@ public class Menu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       QuizManager.questions = new List<Question>();
         questionCount = 1;
         questionsMenu.gameObject.SetActive(false);
-        btnStart.onClick.AddListener(setUpQuestionsMenu); ;
+        btnStart.onClick.AddListener(setUpQuestionsMenu); 
         btnNextQuestion.onClick.AddListener(addQuestions);
         btnDone.onClick.AddListener(loadGame);
-       // btnBack.onClick.AddListener(setUpMainMenu);
-
+        btnQuit.onClick.AddListener(Application.Quit);
+        btnBack.onClick.AddListener(loadMainMenu);
+        // btnBack.onClick.AddListener(setUpMainMenu);
+        audioSource.Play();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        tvQuestionCount.text = $"Question: {questionCount}";
+        Graphic graphic = tvQuestion.GetComponent<InputField>().placeholder;
+        ((Text)graphic).text = $"Question: {questionCount}";
 
 
     }
@@ -52,11 +58,11 @@ public class Menu : MonoBehaviour
     }
 
     void loadGame() {
-        QuizManager.questions.Add(new Question(tvQuestion.text, tvCorrectAnswer.text, tvAnswer2.text, tvAnswer3.text, tvAnswer4.text));
-        Debug.Log(tvQuestion.text);
+        //QuizManager.questions.Add(new Question(tvQuestion.text, tvCorrectAnswer.text, tvAnswer2.text, tvAnswer3.text, tvAnswer4.text));
+        //Debug.Log(tvQuestion.text);
         clearFields();
+        audioSource.Stop();
         SceneManager.LoadScene("GamePlay");
-        questionCount++;
     }
 
     void clearFields() {
@@ -66,6 +72,11 @@ public class Menu : MonoBehaviour
         tvAnswer3.text = "";
         tvAnswer4.text = "";
 
+    }
+
+    void loadMainMenu() {
+        questionsMenu.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(true);
     }
 
 }

@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     public GameObject enemy;
     public GameObject enemyProjectile;
     public GameObject enemyProjectileClone;
+    public AudioSource gunNoise;
+    public AudioSource hurt;
     float timer = 0;
     float moveTime = 0.1F;
     float speed = 0.25F;
@@ -40,12 +42,34 @@ public class Enemy : MonoBehaviour
                 numberOfMovements++;
             }
             fireEnemyProjectile();
+
+
+           
         }
     }
 
     void fireEnemyProjectile() {
         if (Random.Range(0f, 500F) < 1) {
+            gunNoise.Play();
             enemyProjectileClone = Instantiate(enemyProjectile, new Vector3(enemy.transform.position.x, enemy.transform.position.y - 0.4f, 0), enemy.transform.rotation) as GameObject;
         }
     }
-}
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "playerSpace")
+        {
+            GameManager.resetEnemies();
+            GameManager.lives--;
+            GameManager.resume = false;
+            
+
+        }
+        if (collision.gameObject.tag == "bullet")
+        {
+
+            hurt.Play();
+
+        }
+    }
+    }

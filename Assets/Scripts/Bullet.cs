@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Bullet : MonoBehaviour
 {
+    public AudioSource audioSource;
     public Text text;
     public GameObject bullet;
     // Start is called before the first frame update
@@ -22,8 +23,9 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             if (collision.gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text == GameManager.correctAnswer) {
+                audioSource.Play();
                 GameManager.questionCounter++;
-                resetEnemies();
+                GameManager.resetEnemies();
               
                  //collision.gameObject.transform.position = respawn;
 
@@ -40,15 +42,5 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void resetEnemies() {
-        GameObject.Find("Enemy1").transform.position = (new Vector3(-2.61F, 2.93F, 164.5656F));
-        GameObject.Find("Enemy2").transform.position = (new Vector3(2.64F, 2.93F, 164.5656F));
-        GameObject.Find("Enemy3").transform.position = (new Vector3(-5.01F, 0.21F, 164.5656F));
-        GameObject.Find("Enemy4").transform.position = (new Vector3(5.15F, 0.21F, 164.5656F));
-        GameObject.Find("Enemy5").transform.position = (new Vector3(0.1F, -0.82F, 164.5656F));
-
-
-
-
-    }
+    
 }

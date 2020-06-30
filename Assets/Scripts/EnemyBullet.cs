@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    Vector3 respawn = new Vector3(-1.33F, -2.555F, 0);
+    public AudioSource audioSource;
+    Vector3 respawn = new Vector3(0.05F, -4.12F, 0F);
     public GameObject enemyBullet;
     // Start is called before the first frame update
     void Start()
@@ -22,11 +23,12 @@ public class EnemyBullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            audioSource.Play();
             collision.gameObject.transform.position =respawn;
+            GameManager.resetEnemies();
             Destroy(enemyBullet);
             GameManager.lives--;
             GameManager.resume = false;
-
         }
 
         if (collision.gameObject.tag == "bounds")

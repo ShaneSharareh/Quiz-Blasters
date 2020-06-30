@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Question
-{
+{ 
     private string question="";
     private string[] answers = new string[4];
     private string correctAnswer = "";
