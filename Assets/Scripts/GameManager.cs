@@ -20,25 +20,32 @@ public class GameManager : MonoBehaviour
     public Text answer3Text;
     public Text answer4Text;
     public Canvas finishMenu;
+    public Canvas gameOverMenu;
+    public Canvas pauseMenu;
     public Button btnRestart;
-    public Button btnBack;
+    public Button btnQuitPause;
+    public Button btnQuitGameOver;
     public Button btnContinue;
     public AudioSource loseAudio;
     public AudioSource winAudio;
+  
 
     //public Question question = new Question("What is bulgarian cheese", "Frutons", "crutons", "Mayonayse", "ChineseCheddar");
     // Start is called before the first frame update
     void Start()
     {
         resume = true;
-        btnRestart.gameObject.SetActive(false);
-        btnBack.gameObject.SetActive(false);
-        btnContinue.gameObject.SetActive(false);
+        //btnRestart.gameObject.SetActive(false);
+        //btnBack.gameObject.SetActive(false);
+        //btnContinue.gameObject.SetActive(false);
+        pauseMenu.gameObject.SetActive(false);
+        gameOverMenu.gameObject.SetActive(false);
         livesText.text = $"Lives: ${lives}";
         enemyLivesText.text = $"Invaders: {QuizManager.questions.Count - questionCounter}";
         gameOverText.text = "";
         btnRestart.onClick.AddListener(restartGame);
-        btnBack.onClick.AddListener(loadMenu);
+        btnQuitPause.onClick.AddListener(loadMenu);
+        btnQuitGameOver.onClick.AddListener(loadMenu);
         btnContinue.onClick.AddListener(resumeGameplay);
 
 
@@ -59,20 +66,19 @@ public class GameManager : MonoBehaviour
             {
                 loseAudio.Play();
             }
-            loadPause(true);
+            loadGameOverMenu(true,"GAME OVER!");
             //Destroy(GameObject.Find("Player").gameObject.transform);
-            gameOverText.text = "GAME OVER!";
         }
 
         if (Input.GetKey("escape") && resume)
         {
             loadPause(true);
-            resume = false; 
+            resume = false;
 
         }
 
 
-      
+
 
             if (questionCounter < QuizManager.questions.Count)
         {
@@ -89,9 +95,7 @@ public class GameManager : MonoBehaviour
                 winAudio.Play();
             }
             resume = false;
-            btnRestart.gameObject.SetActive(true);
-            btnBack.gameObject.SetActive(true);
-            gameOverText.text = "You Win";
+            loadGameOverMenu(true,"YOU WIN!");
             Destroy(GameObject.Find("Enemy1").transform.parent.gameObject);
             ;
         }
@@ -101,7 +105,7 @@ public class GameManager : MonoBehaviour
             resume = true;
         }
 
-        
+
     }
 
 
@@ -132,22 +136,23 @@ public class GameManager : MonoBehaviour
     }
 
     public void loadPause(bool status) {
-        btnRestart.gameObject.SetActive(status);
-        btnBack.gameObject.SetActive(status);
+        pauseMenu.gameObject.SetActive(status);
 
-        if (lives > 0 && (QuizManager.questions.Count - questionCounter) > 0)
-        {
-            btnContinue.gameObject.SetActive(true);
-        }
-        else
-        {
-            btnContinue.gameObject.SetActive(false);
-        }
-    }
+      }
+
 
     private void resumeGameplay() {
         resume = true;
         loadPause(false);
-        btnContinue.gameObject.SetActive(false);
+    }
+    public bool isPaused(){
+      return pauseMenu.gameObject.activeSelf;
+    }
+
+    public void loadGameOverMenu(bool status, string statusMessage){
+      gameOverMenu.gameObject.SetActive(status);
+      gameOverText.text = statusMessage;
+
+
     }
 }

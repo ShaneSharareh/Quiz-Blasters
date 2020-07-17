@@ -59,7 +59,7 @@ void movement()
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+
         if (collision.gameObject.tag == "enemyBullet")
         {
 

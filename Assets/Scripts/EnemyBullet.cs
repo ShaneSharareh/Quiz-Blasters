@@ -7,9 +7,11 @@ public class EnemyBullet : MonoBehaviour
     public AudioSource audioSource;
     Vector3 respawn = new Vector3(0.05F, -4.12F, 0F);
     public GameObject enemyBullet;
+    public GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
+      gameManager = new GameManager();
 
     }
 
@@ -27,8 +29,10 @@ public class EnemyBullet : MonoBehaviour
             collision.gameObject.transform.position =respawn;
             GameManager.resetEnemies();
             Destroy(enemyBullet);
+            if(GameManager.lives>0){
             GameManager.lives--;
             GameManager.resume = false;
+          }
         }
 
         if (collision.gameObject.tag == "bounds")

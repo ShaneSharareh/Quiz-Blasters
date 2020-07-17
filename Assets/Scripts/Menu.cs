@@ -20,6 +20,7 @@ public class Menu : MonoBehaviour
     public InputField tvAnswer3;
     public InputField tvAnswer4;
     public Text tvQuestionCount;
+    public Text tvError;
     private int questionCount;
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,7 @@ public class Menu : MonoBehaviour
        QuizManager.questions = new List<Question>();
         questionCount = 1;
         questionsMenu.gameObject.SetActive(false);
-        btnStart.onClick.AddListener(setUpQuestionsMenu); 
+        btnStart.onClick.AddListener(setUpQuestionsMenu);
         btnNextQuestion.onClick.AddListener(addQuestions);
         btnDone.onClick.AddListener(loadGame);
         btnQuit.onClick.AddListener(Application.Quit);
@@ -52,17 +53,37 @@ public class Menu : MonoBehaviour
     }
 
     void addQuestions() {
-    QuizManager.questions.Add(new Question(tvQuestion.text, tvCorrectAnswer.text, tvAnswer2.text, tvAnswer3.text, tvAnswer4.text));
-        clearFields();
-        questionCount++;
+      tvError.text = "";
+      if(string.IsNullOrEmpty(tvQuestion.text)){
+        tvError.text = "Please Enter a Question!";
+      }
+      else if(string.IsNullOrEmpty(tvCorrectAnswer.text)){
+        tvError.text = "Please Set a Correct Answer!";
+      }
+      else if(string.IsNullOrEmpty(tvAnswer2.text) || string.IsNullOrEmpty(tvAnswer3.text) || string.IsNullOrEmpty(tvAnswer4.text)){
+        tvError.text = "Please Enter The Rest of The answers!";
+      }
+      else{
+        QuizManager.questions.Add(new Question(tvQuestion.text, tvCorrectAnswer.text, tvAnswer2.text, tvAnswer3.text, tvAnswer4.text));
+            clearFields();
+            questionCount++;
+            tvQuestionCount.text = "Question Set: "+questionCount;
+      }
     }
 
     void loadGame() {
         //QuizManager.questions.Add(new Question(tvQuestion.text, tvCorrectAnswer.text, tvAnswer2.text, tvAnswer3.text, tvAnswer4.text));
         //Debug.Log(tvQuestion.text);
+      if(questionCount<=3){
+        tvError.text = "Please Enter At Least 3 Question Sets!";
+
+      }
+      else{
+        tvError.text = "";
         clearFields();
         audioSource.Stop();
         SceneManager.LoadScene("GamePlay");
+      }
     }
 
     void clearFields() {

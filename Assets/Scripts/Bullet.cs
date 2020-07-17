@@ -8,9 +8,11 @@ public class Bullet : MonoBehaviour
     public AudioSource audioSource;
     public Text text;
     public GameObject bullet;
+    public GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
+      gameManager = new GameManager();
     }
 
     // Update is called once per frame
@@ -26,7 +28,7 @@ public class Bullet : MonoBehaviour
                 audioSource.Play();
                 GameManager.questionCounter++;
                 GameManager.resetEnemies();
-              
+
                  //collision.gameObject.transform.position = respawn;
 
                 //Destroy(collision.gameObject.transform.parent.gameObject);
@@ -42,5 +44,5 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    
+
 }
